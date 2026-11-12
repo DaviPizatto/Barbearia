@@ -3,7 +3,88 @@
 
 <h1>Painel do administrador</h1>
 
-<p>Olá, <%= usuario.username %>. Aqui você vai ver os agendamentos e gerenciar serviços e produtos.</p>
+
+<div class="mb-4">
+    <a href="/adm/servicos" class="btn btn-dark">Gerenciar serviços</a>
+</div>
+
+
+<h2 class="h4">Agenda</h2>
+
+
+<form action="/adm" method="GET" class="row g-2 mb-3">
+
+    <div class="col-md-3">
+
+        <select name="barbeiro" class="form-select">
+            <option value="">Todos os barbeiros</option>
+            <% barbeiros.forEach(barbeiro => { %>
+                <option value="<%= barbeiro.id %>"><%= barbeiro.username %></option>
+            <% }) %>
+        </select>
+
+    </div>
+
+
+    <div class="col-md-3">
+
+        <select name="servico" class="form-select">
+            <option value="">Todos os serviços</option>
+            <% servicos.forEach(servico => { %>
+                <option value="<%= servico.id %>"><%= servico.nome %></option>
+            <% }) %>
+        </select>
+
+    </div>
+
+
+    <div class="col-md-2">
+        <input type="date" name="data" class="form-control">
+    </div>
+
+
+    <div class="col-md-2">
+
+        <select name="hora" class="form-select">
+            <option value="">Todos os horários</option>
+            <% ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'].forEach(hora => { %>
+                <option value="<%= hora %>"><%= hora %></option>
+            <% }) %>
+        </select>
+
+    </div>
+
+
+    <div class="col-md-2 d-flex gap-2">
+        <button type="submit" class="btn btn-dark w-100">Filtrar</button>
+        <a href="/adm" class="btn btn-outline-dark">Limpar</a>
+    </div>
+
+</form>
+
+
+<div class="table-responsive">
+
+    <table class="table bg-white">
+
+        <thead>
+            <tr><th>Data</th><th>Hora</th><th>Barbeiro</th><th>Serviço</th><th>Cliente</th></tr>
+        </thead>
+
+        <tbody>
+            <% agendamentos.forEach(agendamento => { %>
+                <tr>
+                    <td><%= agendamento.data %></td>
+                    <td><%= agendamento.hora %></td>
+                    <td><%= agendamento.barbeiro %></td>
+                    <td><%= agendamento.servico %></td>
+                    <td><%= agendamento.cliente %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+</div>
 
 
 <%- include('partials/footer') %>
