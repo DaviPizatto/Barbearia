@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+
+
+<h1>Serviços</h1>
+<a href="/adm/servicos/novo" class="btn btn-dark mb-3">Novo serviço</a>
+
+
+<div class="table-responsive">
+
+    <table class="table bg-white">
+
+        <thead>
+            <tr><th>Nome</th><th>Categoria</th><th>Preço</th><th>Duração</th><th></th></tr>
+        </thead>
+
+        <tbody>
+
+            <% servicos.forEach(servico => { %>
+                <tr>
+                    <td><%= servico.nome %></td>
+                    <td><%= servico.categoria %></td>
+                    <td>R$ <%= servico.preco.replace('.', ',') %></td>
+                    <td><%= servico.duracao_min %> min</td>
+                    <td class="text-end text-nowrap">
+                        
+                        <a href="/adm/servicos/<%= servico.id %>/editar" class="btn btn-sm btn-outline-dark">Editar</a>
+
+                        <form action="/adm/servicos/<%= servico.id %>/excluir" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Remover</button>
+                        </form>
+
+                    </td>
+                </tr>
+            <% }) %>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<a href="/adm" class="btn btn-outline-dark">Voltar ao painel</a>
+
+
+<%- include('partials/footer') %>
