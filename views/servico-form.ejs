@@ -1,0 +1,74 @@
+<%- include('partials/header') %>
+
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <h1>Serviço</h1>
+
+
+        <form action="<%= acao %>" method="POST">
+
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" id="nome" name="nome" class="form-control" value="<%= servico.nome %>" required>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <input type="text" id="descricao" name="descricao" class="form-control" value="<%= servico.descricao %>">
+            </div>
+
+
+            <div class="mb-3">
+                <label for="preco" class="form-label">Preço (R$)</label>
+                <input type="number" id="preco" name="preco" class="form-control" step="0.01" min="0" value="<%= servico.preco %>" required>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="duracao_min" class="form-label">Duração (min)</label>
+                <input type="number" id="duracao_min" name="duracao_min" class="form-control" min="1" value="<%= servico.duracao_min %>" required>
+            </div>
+
+
+            <div class="mb-3">
+
+                <label for="categoria_id" class="form-label">Categoria</label>
+
+                <select id="categoria_id" name="categoria_id" class="form-select" required>
+                    <option value="">Escolha uma categoria</option>
+                    <% categorias.forEach(categoria => { %>
+                        <option value="<%= categoria.id %>" <%= categoria.id === servico.categoria_id ? 'selected' : '' %>><%= categoria.nome %></option>
+                    <% }) %>
+                </select>
+
+            </div>
+        
+            <p class="form-label">Barbeiros que fazem este serviço</p>
+
+            <div class="mb-3">
+
+                <% barbeiros.forEach(barbeiro => { %>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="b<%= barbeiro.id %>" name="barbeiros" value="<%= barbeiro.id %>" class="form-check-input" <%= marcados.includes(barbeiro.id) ? 'checked' : '' %>>
+                        <label for="b<%= barbeiro.id %>" class="form-check-label"><%= barbeiro.username %></label>
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+            <button type="submit" class="btn btn-dark w-100">Salvar</button>
+
+        </form>
+
+        <a href="/adm/servicos" class="btn btn-outline-dark w-100 mt-2">Voltar</a>
+        
+    </div>
+</div>
+
+
+<%- include('partials/footer') %>
