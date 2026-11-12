@@ -3,7 +3,39 @@
 
 <h1>Olá, <%= usuario.username %></h1>
 
-<p>Esta é a sua área de cliente. Aqui você vai agendar seus serviços.</p>
+
+<h2 class="h4">Meus agendamentos</h2>
+<p>Para agendar, escolha um serviço na <a href="/">página inicial</a> e clique em "Agendar este serviço".</p>
+
+
+<div class="table-responsive">
+    <table class="table bg-white">
+
+        <thead>
+            <tr><th>Data</th><th>Hora</th><th>Serviço</th><th>Barbeiro</th><th></th></tr>
+        </thead>
+
+        <tbody>
+            <% agendamentos.forEach(agendamento => { %>
+
+                <tr>
+                    <td><%= agendamento.data %></td>
+                    <td><%= agendamento.hora %></td>
+                    <td><%= agendamento.servico %></td>
+                    <td><%= agendamento.barbeiro %></td>
+                    <td class="text-end text-nowrap">
+                        <a href="/cliente/agendamentos/<%= agendamento.id %>/editar" class="btn btn-sm btn-outline-dark">Remarcar</a>
+                        <form action="/cliente/agendamentos/<%= agendamento.id %>/excluir" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Cancelar</button>
+                        </form>
+                    </td>
+                </tr>
+
+            <% }) %>
+        </tbody>
+
+    </table>
+</div>
 
 
 <%- include('partials/footer') %>
