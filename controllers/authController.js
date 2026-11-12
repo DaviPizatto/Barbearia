@@ -25,10 +25,7 @@ const postRegister = (req, res) => {
         if (erro) return res.render('register', { erro: 'Erro ao cadastrar.' });
 
         User.create(username, senhaHash, (erro) => {
-            if (erro) {
-                return res.render('register', { erro: 'Esse usuário já existe.' });
-            }
-            if (erro) return res.render('register', { erro: 'Erro ao cadastrar.' });
+            if (erro) return res.render('register', { erro: 'Erro ao cadastrar. Esse usuário pode já existir.' });
             res.redirect('/login');
         });
 
@@ -76,14 +73,4 @@ const logout = (req, res) => {
 };
 
 
-const getCliente = (req, res) => {
-    res.render('cliente');
-};
-
-
-const getAdm = (req, res) => {
-    res.render('adm');
-};
-
-
-module.exports = { getRegister, postRegister, getLogin, postLogin, logout, getCliente, getAdm };
+module.exports = { getRegister, postRegister, getLogin, postLogin, logout };
