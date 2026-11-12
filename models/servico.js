@@ -19,7 +19,7 @@ const getById = (id, callback) => {
          JOIN categorias ON categorias.id = servicos.categoria_id
          WHERE servicos.id = ?`,
         [id],
-        
+            
         (erro, linhas) => {
             if (erro) return callback(erro);
             callback(null, linhas[0]);
