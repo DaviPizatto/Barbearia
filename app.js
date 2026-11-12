@@ -5,7 +5,7 @@ const path = require('path');
 
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 
 app.set('view engine', 'ejs');
@@ -29,8 +29,14 @@ app.use((req, res, next) => {
 
 const router = require('./routes/router');
 const authRoutes = require('./routes/authRoutes');
+const clienteRoutes = require('./routes/clienteRoutes');
+const admRoutes = require('./routes/admRoutes');
+
+
 app.use('/', router);
 app.use('/', authRoutes);
+app.use('/cliente', clienteRoutes);
+app.use('/adm', admRoutes);
 
 
 app.listen(PORT, () => {
